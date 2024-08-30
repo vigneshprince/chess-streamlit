@@ -31,8 +31,8 @@ search_button = col2.button("Search")
 
 # Filter and display data on button click
 if search_term or search_button:
-    # Placeholder for the DataFrame while data is being fetched
-    placeholder = st.empty()
+    if search_button:
+        fetch_data.clear()
     
     with st.spinner(text="In progress"):
         url = "https://chess-results.com/tnr994345.aspx?lan=1".strip("&zeilen=99999")+"&zeilen=99999"
