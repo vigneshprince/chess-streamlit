@@ -19,7 +19,7 @@ def fetch_data(url):
             row_data.append(cell.get_text().strip())
         table_data.append(row_data)
     df= pd.DataFrame(table_data[1:], columns=table_data[0])
-    df['Typ1']=df['sex']+df['Typ'].str.extract(r'(\d+)', expand=False)
+    df['Typ1']=(df['sex']+df['Typ'].str.extract(r'(\d+)', expand=False)).astype(str)
     return df.set_index(df.columns[0])
 
 
