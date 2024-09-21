@@ -19,6 +19,7 @@ def fetch_data(url):
             row_data.append(cell.get_text().strip())
         table_data.append(row_data)
     df= pd.DataFrame(table_data[1:], columns=table_data[0])
+    df['Typ1']=df['sex']+df['Typ'].str.extract('(\d+)', expand=False)
     return df.set_index(df.columns[0])
 
 
@@ -39,9 +40,9 @@ if search_term or search_button:
         st.session_state['df']=fetch_data(url)
         selected=sac.chip(
             items=[
-                sac.ChipItem(label=x) for x in sorted(set(st.session_state['df']["Typ"]))
+                sac.ChipItem(label=x) for x in sorted(set(st.session_state['df']["Typ1"]))
             ], label='Filter', index=[0], align='center', radius='md', multiple=False
         )
-        data=st.session_state['df'][st.session_state['df']['Typ']==selected]
+        data=st.session_state['df'][st.session_state['df']['Typ1']==selected]
         st.markdown(f"Filtered \"**{len(data)}**\" rows")
         st.table(data)
