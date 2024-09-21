@@ -35,7 +35,7 @@ if search_term or search_button:
         fetch_data.clear()
     
     with st.spinner(text="In progress"):
-        url = "https://chess-results.com/tnr994345.aspx?lan=1".strip("&zeilen=99999")+"&zeilen=99999"
+        url = search_term.strip("&zeilen=99999")+"&zeilen=99999"
         st.session_state['df']=fetch_data(url)
         selected=sac.chip(
             items=[
